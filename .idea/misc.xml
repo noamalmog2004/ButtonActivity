@@ -4,13 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/drawable-v24/custom_edittext.xml" value="0.1" />
+        <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/drawable/ic_baseline_calendar_today_24.xml" value="0.1" />
         <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/layout/activity_login.xml" value="0.16354166666666667" />
         <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/layout/activity_main.xml" value="0.1796875" />
+        <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/layout/fragment_calendar.xml" value="0.1640625" />
         <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/layout/fragment_example.xml" value="0.1796875" />
+        <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/layout/fragment_gym.xml" value="0.1640625" />
         <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/layout/fragment_logout.xml" value="0.1796875" />
         <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/layout/fragment_profile.xml" value="0.1796875" />
         <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/layout/fragment_settings.xml" value="0.1796875" />
-        <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/menu/bottom_navigation_view.xml" value="0.1796875" />
+        <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/menu/bottom_navigation_view.xml" value="0.1" />
       </map>
     </option>
   </component>

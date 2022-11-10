@@ -3,6 +3,7 @@ package com.example.buttonactivity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -15,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
     profileFragment profileFragment = new profileFragment();
     logoutFragment logoutFragment = new logoutFragment();
     settingsFragment settingsFragment = new settingsFragment();
+    GymFragment gymFragment = new GymFragment();
+    CalendarFragment calendarFragment = new CalendarFragment();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,10 +36,17 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.logout:
                         //HERE INTENT TO LOGIN PAGE
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, logoutFragment).commit();
+                        Intent intent = new Intent(MainActivity.this, Login.class);
+                        startActivity(intent);
                         return true;
                     case R.id.profile:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, profileFragment).commit();
+                        return true;
+                    case R.id.gym:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container,gymFragment).commit();
+                        return true;
+                    case R.id.calendar:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container,calendarFragment).commit();
                         return true;
                 }
                 return false;
