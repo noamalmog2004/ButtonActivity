@@ -1,14 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/primary"
     tools:context=".settingsFragment">
 
-
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="SETTINGS FRAGMENT" />
+        android:layout_height="wrap_content">
+        android:padding="14dp"
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            android:padding="14dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="settings"
+            android:layout_centerInParent="true"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            />
+    </RelativeLayout>
 
-</RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/profile2"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="User Name"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingTop="5dp"
+                android:text="050-404-4300 #USER NAMES PHONE"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:paddingStart="30dp"
+                android:paddingEnd="30dp"
+                android:background="@drawable/round_back_secondary_100"
+                android:text="Edit Profile"
+                android:textAllCaps="false"
+                android:textColor="@color/primary"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="40dp"
+                android:orientation="vertical"
+                android:padding="15dp"
+                android:background="@drawable/round_back_10_20"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_baseline_login_24"
+                        android:padding="12dp"
+                        />
+                </RelativeLayout>
+
+            </LinearLayout>
+    </ScrollView>
+</LinearLayout>

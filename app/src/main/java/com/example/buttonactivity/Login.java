@@ -13,9 +13,10 @@ import android.widget.Toast;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
+    Button btnRegister1;
     EditText etUserName, etPassword;
     Button btnLogin;
-    TextView tvSignUpNow;
+    //TextView tvSignUpNow;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,37 +25,24 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         etPassword = findViewById(R.id.etPassword);
         etUserName = findViewById(R.id.etUserName);
         btnLogin = findViewById(R.id.btnLogin);
+        btnRegister1 = findViewById(R.id.btnRegister1);
+        btnRegister1.setOnClickListener(this);
         btnLogin.setOnClickListener(this);
-        tvSignUpNow = findViewById(R.id.tvSignUpText);
-        tvSignUpNow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (view == tvSignUpNow)
-                {
-                    Toast.makeText(Login.this,"nOTT YET",Toast.LENGTH_SHORT).show();
-                    AlertDialog.Builder adb = new AlertDialog.Builder(Login.this);
-                    adb.setMessage("Title");
-                    adb.show();
 
-                }
-            }
-        });
 
     }
 
     @Override
     public void onClick(View view) {
-        if (etUserName.getText().toString().equals("user") && etPassword.getText().toString().equals("password"))
+        if (view == btnLogin)
         {
-            Toast.makeText(this,"login good",Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(Login.this, MainActivity.class);
+            startActivity(i);
         }
-        else
+        if (view == btnRegister1)
         {
-            Toast.makeText(this,"login bad",Toast.LENGTH_SHORT).show();
-        }
-        if (view == btnLogin) {
-            Intent intent = new Intent(Login.this, MainActivity.class);
-            startActivity(intent);
+            Intent i = new Intent(Login.this, Register.class);
+            startActivity(i);
         }
     }
 }

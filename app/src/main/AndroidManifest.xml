@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ButtonActivity">
         <activity
+            android:name=".Register"
+            android:exported="true" />
+        <activity
             android:name=".flashScreen"
             android:exported="true" />
         <activity
@@ -24,6 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

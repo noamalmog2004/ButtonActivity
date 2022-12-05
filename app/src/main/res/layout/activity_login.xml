@@ -68,16 +68,12 @@ android:background="@drawable/bb"
     </LinearLayout>
 </androidx.cardview.widget.CardView>
 
-<TextView
-    android:id="@+id/tvSignUpText"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="20dp"
-    android:clickable="true"
-    android:padding="8dp"
-    android:text="Not yet registered? Sign Up now!"
-    android:textAlignment="center"
-    android:textSize="18sp"
-    tools:ignore="TouchTargetSizeCheck" />
+    <Button
+        android:id="@+id/btnRegister1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:text="Click me ro register!" />
+
 
 </LinearLayout>
