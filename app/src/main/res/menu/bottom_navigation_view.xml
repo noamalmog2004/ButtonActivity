@@ -22,9 +22,9 @@
         android:title="gym"
         android:icon="@drawable/ic_baseline_fitness_center_24"
         />
-    <item android:icon="@drawable/ic_baseline_home_24"
-        android:title="home"
-        android:id="@+id/home"/>
+<!--    <item android:icon="@drawable/ic_baseline_home_24"-->
+<!--        android:title="home"-->
+<!--        android:id="@+id/home"/>-->
     <item
         android:id="@+id/calendar"
         android:title="calendar"
