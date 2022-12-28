@@ -11,4 +11,13 @@
         android:layout_height="match_parent"
         android:text="GYMMMM" />
 
+    <VideoView
+        android:id="@+id/video"
+        android:layout_width="179dp"
+        android:layout_height="98dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="62dp"
+        android:layout_marginBottom="46dp"
+        android:visibility="invisible" />
+
 </RelativeLayout>
