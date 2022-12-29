@@ -93,9 +93,7 @@ public class firebaseDB {
 
     public boolean login(String email, String password)
     {
-        FirebaseUser user = this.auth.getCurrentUser();
         Task<AuthResult> task = this.auth.signInWithEmailAndPassword(email, password);
-        user = this.auth.getCurrentUser();
         while(!task.isComplete()) {}
         if(!task.isSuccessful())
         {

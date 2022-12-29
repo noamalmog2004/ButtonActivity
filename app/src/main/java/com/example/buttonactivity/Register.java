@@ -2,12 +2,11 @@ package com.example.buttonactivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 public class Register extends AppCompatActivity implements View.OnClickListener {
 
@@ -23,7 +22,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
         etFullname = findViewById(R.id.etFullname);
-        etEmail = findViewById(R.id.etEmail);
+        etEmail = findViewById(R.id.etEmail1);
     }
     public void onClick(View view) {
         firebaseDB db = new firebaseDB();
@@ -31,8 +30,13 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         String password = etPassword.getText().toString();
         String email = etEmail.getText().toString();
         String firstname = etFullname.getText().toString();
-        if (view == btnRegister)
-            db.register(email, password, firstname,username);
+        if (view == btnRegister) {
+            db.register(email, password, firstname, username);
+            Intent i = new Intent(Register.this, MainActivity.class);
+            startActivity(i);
+        }
+
 
     }
+
 }

@@ -32,17 +32,18 @@ android:background="@drawable/bb"
             android:textSize="36sp"
             android:textAlignment="center"
             android:textStyle="bold"/>
+
         <EditText
+            android:id="@+id/etEmail1"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:id="@+id/etUserName"
+            android:layout_marginTop="40dp"
             android:background="@drawable/custom_edittext"
             android:drawableLeft="@drawable/ic_baseline_person_24"
             android:drawablePadding="8dp"
-            android:hint="Username"
+            android:hint="Email"
             android:padding="8dp"
-            android:textColor="@color/black"
-            android:layout_marginTop="40dp"/>
+            android:textColor="@color/black" />
 
         <EditText
             android:layout_width="match_parent"
@@ -73,7 +74,7 @@ android:background="@drawable/bb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
-        android:text="Click me ro register!" />
+        android:text="Click me to register!" />
 
 
 </LinearLayout>

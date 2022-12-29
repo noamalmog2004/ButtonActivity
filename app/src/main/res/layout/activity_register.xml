@@ -14,15 +14,18 @@
         tools:context=".MainActivity">
 
         <TextView
+            android:id="@+id/signin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/signin"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="50dp"
+            android:gravity="center"
             android:text="Register"
             android:textColor="@color/white"
             android:textSize="35dp"
-            android:textStyle="bold"
-            android:layout_margin="50dp"
-            android:gravity="center"/>
+            android:textStyle="bold" />
 
 
         <EditText
@@ -79,7 +82,7 @@
             android:textColorHint="@color/white" />
 
         <EditText
-            android:id="@+id/etEmail"
+            android:id="@+id/etEmail1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/etFullname"

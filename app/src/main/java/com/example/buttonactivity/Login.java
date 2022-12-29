@@ -1,22 +1,20 @@
 package com.example.buttonactivity;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
-import com.example.buttonactivity.firebaseDB;
 
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
     Button btnRegister1;
-    EditText etUserName, etPassword;
+    EditText etEmail, etPassword;
     Button btnLogin;
     //TextView tvSignUpNow;
     @Override
@@ -25,7 +23,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_login);
 
         etPassword = findViewById(R.id.etPassword);
-        etUserName = findViewById(R.id.etUserName);
+        etEmail = findViewById(R.id.etEmail1);
         btnLogin = findViewById(R.id.btnLogin);
         btnRegister1 = findViewById(R.id.btnRegister1);
         btnRegister1.setOnClickListener(this);
@@ -36,15 +34,27 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (view == btnLogin)
-        {
-            Intent i = new Intent(Login.this, MainActivity.class);
-            startActivity(i);
-        }
+
+        firebaseDB db = new firebaseDB();
+        String password = etPassword.getText().toString();
+        String email = etEmail.getText().toString();
         if (view == btnRegister1)
         {
             Intent i = new Intent(Login.this, Register.class);
             startActivity(i);
+        }
+        if (view == btnLogin)
+        {
+            if(db.login(email, password))
+            {
+                Toast.makeText(Login.this, "email exists!!!", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(Login.this, MainActivity.class);
+                startActivity(i);
+            }
+            else
+            {
+                Toast.makeText(Login.this, "email or password doesn't exists", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }
