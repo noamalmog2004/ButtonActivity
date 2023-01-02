@@ -93,6 +93,7 @@ public class firebaseDB {
 
     public boolean login(String email, String password)
     {
+
         Task<AuthResult> task = this.auth.signInWithEmailAndPassword(email, password);
         while(!task.isComplete()) {}
         if(!task.isSuccessful())
@@ -106,6 +107,75 @@ public class firebaseDB {
     public void logout()
     {
         this.auth.signOut();
+    }
+
+
+
+
+    public boolean fullnameValid(String fullname)
+    {
+
+
+        if (fullname.length() == 0) {
+            return false;
+        }
+        for (int i = 0; i < fullname.length(); i++) {
+            if (!(fullname.charAt(i) >= 'a' && fullname.charAt(i) <= 'z' || fullname.charAt(i) >= 'A' && fullname.charAt(i) <= 'Z')) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public  boolean emailValid(String email)
+    {
+        String checkEmail = "[a-zA-Z0-9._-]+@[a-z]+.+[a-z]+";
+        if (email.isEmpty())
+            return false;
+        else if (!email.matches(checkEmail))
+            return false;
+        return true;
+    }
+
+    public boolean passwordValid(String password)
+    {
+        //this.auth.createUserWithEmailAndPassword(email, password);
+        String checkPassword = "^" +
+                "(?=.*[0-9])" +         //at least 1 digit
+                "(?=.*[a-z])" +         //at least 1 lower case letter
+                "(?=.*[A-Z])" +         //at least 1 upper case letter
+                "(?=.*[a-zA-Z])" +      //any letter
+                "(?=S+$)" +           //no white spaces
+                ".{4,}" +               //at least 4 characters
+                "$";
+        if (password.isEmpty())
+            return false;
+        else if (!password.matches(checkPassword))
+            return false;
+        else
+            return true;
+    }
+    public boolean ageValid(String age)
+    {
+        //IF I == 2, AGE IS 100+
+        if (age.length()>2)
+            return false;
+
+        for (int i = 0; i < age.length(); i++)
+        {
+            if(!(age.charAt(i)>'0' && age.charAt(i)<'9'))
+                return false;
+        }
+        return true;
+    }
+    class UsernameValidator {
+        public static final String regularExpression = "^[a-zA-Z][a-zA-Z0-9_]{6,19}$";
+    }
+    public boolean usernameValid(String userName)
+    {
+        if (userName.matches(UsernameValidator.regularExpression)) {
+            return true;
+        }
+        return false;
     }
 
 }

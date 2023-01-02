@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class Register extends AppCompatActivity implements View.OnClickListener {
 
@@ -29,12 +30,29 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         String username = etUsername.getText().toString();
         String password = etPassword.getText().toString();
         String email = etEmail.getText().toString();
-        String firstname = etFullname.getText().toString();
+        String fullname = etFullname.getText().toString();
+
         if (view == btnRegister) {
-            db.register(email, password, firstname, username);
-            Intent i = new Intent(Register.this, MainActivity.class);
-            startActivity(i);
+            if (!(db.fullnameValid(fullname)))
+                Toast.makeText(getApplicationContext(), "Full name is not valid", Toast.LENGTH_SHORT).show();
+            else if (!(db.passwordValid(password)))
+                Toast.makeText(getApplicationContext(), "Password is not valid", Toast.LENGTH_SHORT).show();
+            else if (!(db.emailValid(email)))
+                Toast.makeText(getApplicationContext(), "Email is not valid", Toast.LENGTH_SHORT).show();
+            else if (!(db.usernameValid(username)))
+                Toast.makeText(getApplicationContext(), "username is not valid", Toast.LENGTH_SHORT).show();
+            else {
+                db.register(username,password, email, fullname);
+                Intent i = new Intent(Register.this, MainActivity.class);
+                startActivity(i);
+            }
         }
+
+//        if (view == btnRegister) {
+//            db.register(email, password, firstname, username);
+//            Intent i = new Intent(Register.this, MainActivity.class);
+//            startActivity(i);
+//        }
 
 
     }

@@ -9,7 +9,7 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-
+import com.example.buttonactivity.firebaseDB;
 public class MainActivity extends AppCompatActivity {
 
     // TODO: 05/12/2022 FIX HOME FRAGMENT
@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.logout:
                         //HERE INTENT TO LOGIN PAGE
+                        //firebaseDB db = new firebaseDB();
+                        //db.logout();
                         Intent intent = new Intent(MainActivity.this, Login.class);
                         startActivity(intent);
                         return true;
