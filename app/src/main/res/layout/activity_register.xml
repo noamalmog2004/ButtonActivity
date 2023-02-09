@@ -11,7 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bb"
-        tools:context=".MainActivity">
+        android:orientation="vertical"
+        tools:context=".MainActivity"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-78dp">
 
         <TextView
             android:id="@+id/signin"
@@ -125,6 +128,19 @@
             android:layout_marginBottom="20dp"
             android:text="Forgot password?"
             android:textColor="@color/white" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/loginbtn"
+            android:layout_alignParentEnd="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="163dp"
+            android:text="Back"
+            android:id="@+id/btnBack"
+            android:layout_marginBottom="60dp">
+
+        </Button>
 
     </RelativeLayout>
 

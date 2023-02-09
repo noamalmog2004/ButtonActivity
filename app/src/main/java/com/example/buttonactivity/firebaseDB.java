@@ -2,6 +2,7 @@ package com.example.buttonactivity;
 
 import android.app.DownloadManager;
 import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -32,6 +33,7 @@ import java.io.InputStream;
 public class firebaseDB {
     private FirebaseAuth auth;
     private FirebaseFirestore fs;
+    private FirebaseStorage firebaseStorage;
     public static User currentUser = null;
     static enum SIGNUP_RESULTS {
         SUCCESS,
@@ -43,16 +45,16 @@ public class firebaseDB {
     }
 
     class User
-    {
-        public String email, password, fullName, username;
-        public FirebaseUser user;
-        User(String email, String password, String fullName, String username, FirebaseUser user)
-        {
-            this.email = email;
-            this.password = password;
-            this.fullName = fullName;
-            this.username = username;
-            this.user = user;
+            {
+                public String email, password, fullName, username;
+                public FirebaseUser user;
+                User(String email, String password, String fullName, String username, FirebaseUser user)
+                {
+                    this.email = email;
+                    this.password = password;
+                    this.fullName = fullName;
+                    this.username = username;
+                    this.user = user;
         }
         User(String email, String password, String fullName, String username)
         {
@@ -69,13 +71,36 @@ public class firebaseDB {
     {
         this.auth = FirebaseAuth.getInstance();
         this.fs = FirebaseFirestore.getInstance();
+        this.firebaseStorage = FirebaseStorage.getInstance();
     }
+
+    public void addFile(Uri file)
+    {
+        StorageReference storageRef = this.firebaseStorage.getReference();
+
+        // Create a reference to "mountains.jpg"
+        StorageReference mountainsRef = storageRef.child("profile/");
+
+        // While the file names are the same, the references point to different files
+
+        //mountainsRef.getName().equals(mountainsRef.getName());    // true
+        //mountainsRef.getPath().equals(mountainsRef.getPath());    // false
+        mountainsRef.putFile(file);
+        //StorageReference pathReference = storageRef.child("profile/MemeKing.png");
+
+        // Create a reference to a file from a Cloud Storage URI
+       // StorageReference gsReference = this.firebaseStorage.getReferenceFromUrl("gs://finalproject-3b98c.appspot.com/profile/MemeKing.png");
+    }
+
+
+
     public SIGNUP_RESULTS register(String email, String password, String fullName, String username)
     {
         User user = new User(email, password, fullName, username);
         boolean exists;
         Task<SignInMethodQueryResult> task =  this.auth.fetchSignInMethodsForEmail(email);
-        boolean isNewUser =  task.getResult().getSignInMethods().isEmpty();
+        while(!task.isComplete());
+        boolean isNewUser = task.getResult().getSignInMethods().isEmpty();
         if(isNewUser)
         {
             auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -84,7 +109,21 @@ public class firebaseDB {
                     int x = 5;
                 }
             });
-            fs.collection("users").document(email).set(user);
+            fs.collection("users").document(email).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    System.out.println("MADE IT");
+                }
+            })
+            .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    System.out.println("ERROR");
+                    System.out.println(e.toString());
+
+
+                }
+            });
             return SIGNUP_RESULTS.SUCCESS;
         }
         return SIGNUP_RESULTS.EMAIL_EXISTS;
@@ -93,7 +132,6 @@ public class firebaseDB {
 
     public boolean login(String email, String password)
     {
-
         Task<AuthResult> task = this.auth.signInWithEmailAndPassword(email, password);
         while(!task.isComplete()) {}
         if(!task.isSuccessful())

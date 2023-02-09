@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ChangeInformation"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+<!--     HERE ACCESS GALLERY-->
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="60sp"
+            android:id="@+id/imgGallery"
+            />
+        <Button
+            android:id="@+id/btnCamera"
+            android:layout_width="200dp"
+            android:layout_height="70dp"
+            android:text="OPEN GALLERY"
+            android:layout_gravity="center"
+            />
+        <TextView
+            android:id="@+id/currentName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="cn: "
+            android:textColor="@color/black"
+            android:textSize="40sp"
+            />
+
+        <EditText
+            android:id="@+id/newName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Name"
+            android:textColor="@color/black"
+            android:textSize="40sp" />
+
+        <TextView
+            android:id="@+id/currentWeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="cn: "
+            android:textColor="@color/black"
+            android:textSize="40sp"
+            />
+
+        <EditText
+            android:id="@+id/newWeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="40sp"
+            android:hint="Enter Weight"
+            />
+
+        <TextView
+            android:id="@+id/currentHeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="cn: "
+            android:textColor="@color/black"
+            android:layout_marginTop="10sp"
+            android:textSize="40sp"/>
+        <EditText
+            android:id="@+id/newHeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="40sp"
+            android:hint="Enter Height"
+
+            />
+        <TextView
+            android:id="@+id/currentEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="cn: "
+            android:textColor="@color/black"
+            android:layout_marginTop="10sp"
+            android:textSize="40sp"/>
+        <EditText
+            android:id="@+id/newEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="40sp"
+            android:hint="Enter Email"
+            />
+        <TextView
+            android:id="@+id/currentPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="cn: "
+            android:textColor="@color/black"
+            android:layout_marginTop="10sp"
+            android:textSize="40sp"/>
+        <EditText
+            android:id="@+id/newPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="40sp"
+            android:hint="Enter Password"
+            />
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="SAVE CHANGES"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            />
+        <!--        <TextView-->
+    <!--            android:id="@+id/currentAge"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:paddingTop="30dp"-->
+    <!--            android:text="Current Age: "-->
+    <!--            android:textColor="@color/black"-->
+    <!--            android:textSize="20dp"-->
+    <!--            tools:layout_editor_absoluteX="16dp"-->
+    <!--            tools:layout_editor_absoluteY="143dp" />-->
+
+    </LinearLayout>
+</ScrollView>

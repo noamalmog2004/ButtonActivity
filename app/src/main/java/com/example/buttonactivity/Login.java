@@ -71,7 +71,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         if (requestCode == 1000)
         {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-
+            Exception ed = task.getException();
+            Toast.makeText(Login.this, ed.getMessage().toString(), Toast.LENGTH_SHORT).show();
             try {
                 task.getResult(ApiException.class);
                 navigateToSecondActivity();

@@ -12,11 +12,11 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.example.buttonactivity.firebaseDB;
 public class MainActivity extends AppCompatActivity {
 
-    // TODO: 05/12/2022 FIX HOME FRAGMENT
+
     BottomNavigationView bottomNavigationView;
     profileFragment profileFragment = new profileFragment();
     HomeFragment homeFragment = new HomeFragment();
-    settingsFragment settingsFragment = new settingsFragment();
+    //settingsFragment settingsFragment = new settingsFragment();
     GymFragment gymFragment = new GymFragment();
     CalendarFragment calendarFragment = new CalendarFragment();
     @Override
@@ -24,8 +24,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         bottomNavigationView = findViewById(R.id.bottom_navigation);
-        getSupportFragmentManager().beginTransaction().replace(R.id.container,gymFragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container,homeFragment).commit();
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -33,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
             {
                 switch (item.getItemId()){
 
-                    case R.id.settings:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, settingsFragment).commit();
+                    case R.id.home:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
                         return true;
                     case R.id.logout:
                         //HERE INTENT TO LOGIN PAGE
@@ -51,9 +53,6 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.calendar:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,calendarFragment).commit();
-                        return true;
-                    case R.id.home:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container,homeFragment).commit();
                         return true;
                 }
                 return false;

@@ -10,18 +10,23 @@
         <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/drawable/round_back_10_20.xml" value="0.165625" />
         <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/drawable/round_back_night_mode.xml" value="0.165625" />
         <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/drawable/round_back_secondary_100.xml" value="0.165625" />
+        <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/layout/activity_change_information.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/layout/activity_chest_activitiy.xml" value="0.14479166666666668" />
         <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/layout/activity_flash_screen.xml" value="0.17692307692307693" />
         <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/layout/activity_login.xml" value="0.22" />
-        <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/layout/activity_main.xml" value="0.1796875" />
+        <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/layout/activity_register.xml" value="0.22" />
         <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/layout/activity_second.xml" value="0.1640625" />
+        <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/layout/activity_test.xml" value="0.22" />
+        <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/layout/activity_test_rollview.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/layout/dialog_chest.xml" value="0.189873417721519" />
         <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/layout/fragment_calendar.xml" value="0.1640625" />
+        <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/layout/fragment_chest_exer.xml" value="0.1796875" />
         <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/layout/fragment_example.xml" value="0.1796875" />
-        <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/layout/fragment_gym.xml" value="0.13333333333333333" />
+        <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/layout/fragment_gym.xml" value="0.22" />
         <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/layout/fragment_home.xml" value="0.1640625" />
         <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/layout/fragment_logout.xml" value="0.1796875" />
-        <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/layout/fragment_profile.xml" value="0.1796875" />
+        <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/layout/fragment_profile.xml" value="0.22" />
         <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/layout/fragment_settings.xml" value="0.22" />
         <entry key="..\:/Users/Yonatan/AndroidStudioProjects/ButtonActivity/app/src/main/res/menu/bottom_navigation_view.xml" value="0.3333333333333333" />
       </map>

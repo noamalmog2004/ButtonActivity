@@ -1,86 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#0000FF"
-    android:padding="16dp">
-
-    <ImageView
-        android:id="@+id/profile_picture"
-        android:layout_width="164dp"
-        android:layout_height="155dp"
-        android:layout_gravity="center"
-        android:src="@drawable/profile2" />
+    tools:context=".profileFragment">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Change Age"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp" />
-
-    <EditText
-        android:id="@+id/age_input"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:minHeight="48dp"
-        android:textColor="#000000"
-        tools:ignore="SpeakableTextPresentCheck" />
+        android:layout_height="match_parent"
+        android:text="PROFILE" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Change Weight"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp" />
-
-    <EditText
-        android:id="@+id/weight_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:minHeight="48dp"
-        android:textColor="#000000"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Change Email"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp" />
-
-    <EditText
-        android:id="@+id/email_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:minHeight="48dp"
-        android:textColor="#000000"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Change Password"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp" />
-
-    <EditText
-        android:id="@+id/password_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:minHeight="48dp"
-        android:textColor="#000000"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-</LinearLayout>
+</RelativeLayout>
