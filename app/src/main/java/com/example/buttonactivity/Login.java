@@ -96,8 +96,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         String email = etEmail.getText().toString();
 
         //test:
-        Intent i = new Intent(Login.this, MainActivity.class);
-        startActivity(i);
+//        Intent i = new Intent(Login.this, MainActivity.class);
+//        startActivity(i);
 
 
         if (view == btnRegister1)

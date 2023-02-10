@@ -16,7 +16,7 @@ public class ChangeInformation extends AppCompatActivity implements View.OnClick
     public Uri imageUri;
     private final int GALLERY_REQ_CODE = 1000;
     ImageView imgGallery;
-    Button btnSave;
+    Button btnSave, btnCamera;
     boolean changedProfile = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,16 +26,20 @@ public class ChangeInformation extends AppCompatActivity implements View.OnClick
         Button btnGallery = findViewById(R.id.btnCamera);
         btnSave = findViewById(R.id.btnSave);
         btnSave.setOnClickListener(this);
+        btnCamera = findViewById(R.id.btnCamera);
+        btnCamera.setOnClickListener(this);
         btnGallery.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View view) {
-        Intent iGallery = new Intent(Intent.ACTION_PICK);
-        iGallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(iGallery, GALLERY_REQ_CODE);
-
+        if(view == btnCamera)
+        {
+            Intent iGallery = new Intent(Intent.ACTION_PICK);
+            iGallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(iGallery, GALLERY_REQ_CODE);
+        }
 
         if (view == btnSave)
         {
@@ -43,6 +47,8 @@ public class ChangeInformation extends AppCompatActivity implements View.OnClick
             if (changedProfile){
                 db.addFile(imageUri);
             }
+            Intent intent = new Intent(ChangeInformation.this, MainActivity.class);
+            startActivity(intent);
         }
     }
 

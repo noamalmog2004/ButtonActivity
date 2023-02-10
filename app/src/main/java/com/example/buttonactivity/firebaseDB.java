@@ -22,6 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -31,9 +32,9 @@ import java.io.InputStream;
 
 
 public class firebaseDB {
-    private FirebaseAuth auth;
-    private FirebaseFirestore fs;
-    private FirebaseStorage firebaseStorage;
+    public FirebaseAuth auth;
+    public FirebaseFirestore fs;
+    public FirebaseStorage firebaseStorage;
     public static User currentUser = null;
     static enum SIGNUP_RESULTS {
         SUCCESS,
@@ -43,9 +44,9 @@ public class firebaseDB {
         INVALID_NAME,
 
     }
-
     class User
             {
+                public String userId;
                 public String email, password, fullName, username;
                 public FirebaseUser user;
                 User(String email, String password, String fullName, String username, FirebaseUser user)
@@ -85,7 +86,18 @@ public class firebaseDB {
 
         //mountainsRef.getName().equals(mountainsRef.getName());    // true
         //mountainsRef.getPath().equals(mountainsRef.getPath());    // false
-        mountainsRef.putFile(file);
+        mountainsRef.putFile(file).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                System.out.println("Made it");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                System.out.println("Error");
+
+            }
+        });
         //StorageReference pathReference = storageRef.child("profile/MemeKing.png");
 
         // Create a reference to a file from a Cloud Storage URI
