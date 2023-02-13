@@ -3,13 +3,24 @@ package com.example.buttonactivity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import java.io.File;
 
 public class Register extends AppCompatActivity implements View.OnClickListener {
 
@@ -53,6 +64,32 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 //            else {
             try {
                 db.register(email, password, fullname, username);
+//              Uri imageUri2;
+//                File imageFile = new File(Environment.getExternalStorageDirectory(), "profile2.jpg");
+//                imageUri2 = Uri.fromFile(imageFile);
+                Uri imageUri2 = Uri.parse("android.resource://" + getPackageName() + "/" + R.drawable.profile2);
+                StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+                String userEmail2 = db.auth.getCurrentUser().getEmail();
+                StorageReference imageRef = storageRef.child("images/"+userEmail2+".jpg");
+
+                UploadTask uploadTask = imageRef.putFile(imageUri2);
+
+                uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        // Image was successfully uploaded to Firebase Storage
+                        Toast.makeText(Register.this, "uploaded defualt pic", Toast.LENGTH_SHORT).show();
+
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Failed to upload image to Firebase Storage
+                        Toast.makeText(Register.this, "Failed to upload image to Firebase Storage\n", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
                 Intent i = new Intent(Register.this, MainActivity.class);
                 startActivity(i);
             }
