@@ -13,6 +13,8 @@ import com.example.buttonactivity.firebaseDB;
 public class MainActivity extends AppCompatActivity {
 
 
+
+
     BottomNavigationView bottomNavigationView;
     profileFragment profileFragment = new profileFragment();
     HomeFragment homeFragment = new HomeFragment();
@@ -39,9 +41,9 @@ public class MainActivity extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
                         return true;
                     case R.id.logout:
-                        //HERE INTENT TO LOGIN PAGE
-                        //firebaseDB db = new firebaseDB();
-                        //db.logout();
+                        firebaseDB db = new firebaseDB();
+                        db.logout();
+                        //onBackPressed();
                         Intent intent = new Intent(MainActivity.this, Login.class);
                         startActivity(intent);
                         return true;
@@ -59,7 +61,4 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
 }

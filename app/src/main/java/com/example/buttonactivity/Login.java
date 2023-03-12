@@ -19,6 +19,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseUser;
 
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
@@ -26,16 +27,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     Button btnRegister1;
     EditText etEmail, etPassword;
     Button btnLogin;
-    //TextView tvSignUpNow;
-
-    GoogleSignInOptions gso;
-    GoogleSignInClient gsc;
-    ImageView googleBtn;
 
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_login);
 
         etPassword = findViewById(R.id.etPassword);
@@ -45,48 +42,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         btnRegister1.setOnClickListener(this);
         btnLogin.setOnClickListener(this);
 
-
-        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-        gsc = GoogleSignIn.getClient(this,gso);
-
-        googleBtn = findViewById(R.id.google_btn);
-        googleBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signIn();
-            }
-        });
-
-
-    }
-    void signIn()
-    {
-        Intent signInIntent = gsc.getSignInIntent();
-        startActivityForResult(signInIntent,1000);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1000)
-        {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            Exception ed = task.getException();
-            Toast.makeText(Login.this, ed.getMessage().toString(), Toast.LENGTH_SHORT).show();
-            try {
-                task.getResult(ApiException.class);
-                navigateToSecondActivity();
-            } catch (ApiException e) {
-                Toast.makeText(Login.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    void navigateToSecondActivity() {
-        finish();
-        Intent intent = new Intent(Login.this,SecondActivity.class);
-        startActivity(intent);
-    }
 
     @Override
     public void onClick(View view) {

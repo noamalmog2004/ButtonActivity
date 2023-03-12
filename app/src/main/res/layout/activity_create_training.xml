@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#3551ED">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/containerCreate">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:text="Build Your Training"
+            android:textColor="@color/black"
+            android:textSize="30dp" />
+
+<!--        <EditText-->
+<!--            android:id="@+id/etDay"-->
+<!--            android:layout_width="300dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/tvTitle"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:layout_marginTop="30dp"-->
+<!--            android:hint="Enter Day of month"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textColorHint="@color/black" />-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/etMonth"-->
+<!--            android:layout_width="300dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/etDay"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:layout_marginTop="30dp"-->
+<!--            android:hint="Enter Month"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textColorHint="@color/black" />-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/etYear"-->
+<!--            android:layout_width="300dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/etMonth"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:layout_marginTop="30dp"-->
+<!--            android:hint="Enter year"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textColorHint="@color/black" />-->
+        <Button
+            android:id="@+id/btnShowCal"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:layout_below="@id/tvTitle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:text="PICK DATE" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:id="@+id/text"
+            android:layout_below="@id/btnShowCal"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
+            android:text="DATE YOU SELECTED: "
+            android:gravity="center"
+            android:layout_marginTop="15dp"/>
+
+        <EditText
+            android:id="@+id/id1"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btnShowCal"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:hint="Enter id of 1. training"
+            android:minHeight="48dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black" />
+
+        />
+
+        <EditText
+            android:id="@+id/id2"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/id1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:hint="Enter id of 2. training"
+            android:minHeight="48dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black" />
+
+        />
+
+        <EditText
+            android:id="@+id/id3"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/id2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:hint="Enter id of 3. training"
+            android:minHeight="48dp"
+
+            android:textColor="@color/black"
+            android:textColorHint="@color/black" />
+
+        <EditText
+            android:id="@+id/id4"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/id3"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:hint="Enter id of 4. training"
+            android:minHeight="48dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black" />
+
+        />
+        />
+
+        <Button
+            android:id="@+id/btnSaveTraining"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/id4"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:text="save" />
+    </RelativeLayout>
+</ScrollView>

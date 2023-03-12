@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.SignInMethodQueryResult;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
@@ -35,6 +36,7 @@ public class firebaseDB {
     public FirebaseAuth auth;
     public FirebaseFirestore fs;
     public FirebaseStorage firebaseStorage;
+    public FirebaseDatabase fd;
     public static User currentUser = null;
     static enum SIGNUP_RESULTS {
         SUCCESS,
@@ -44,25 +46,18 @@ public class firebaseDB {
         INVALID_NAME,
 
     }
-    class User
-            {
-                public String userId;
-                public String email, password, fullName, username;
-                public FirebaseUser user;
-                User(String email, String password, String fullName, String username, FirebaseUser user)
-                {
-                    this.email = email;
-                    this.password = password;
-                    this.fullName = fullName;
-                    this.username = username;
-                    this.user = user;
-        }
-        User(String email, String password, String fullName, String username)
+    class User {
+        public String userId;
+        public String email, password, fullName, weight, age;
+        public FirebaseUser user;
+
+        User(String email, String password, String age, String weight, String fullName)
         {
             this.email = email;
             this.password = password;
             this.fullName = fullName;
-            this.username = username;
+            this.weight = weight;
+            this.age = age;
             this.user = null;
         }
     }
@@ -73,6 +68,7 @@ public class firebaseDB {
         this.auth = FirebaseAuth.getInstance();
         this.fs = FirebaseFirestore.getInstance();
         this.firebaseStorage = FirebaseStorage.getInstance();
+        this.fd = FirebaseDatabase.getInstance();
     }
 
     public void addFile(Uri file)
@@ -106,10 +102,10 @@ public class firebaseDB {
 
 
 
-    public SIGNUP_RESULTS register(String email, String password, String fullName, String username)
+    public SIGNUP_RESULTS register(String email, String password, String age, String weight, String fullname)
     {
-        User user = new User(email, password, fullName, username);
-        boolean exists;
+        String a="";
+        User user = new User(email, password, age, weight, fullname);
         Task<SignInMethodQueryResult> task =  this.auth.fetchSignInMethodsForEmail(email);
         while(!task.isComplete());
         boolean isNewUser = task.getResult().getSignInMethods().isEmpty();
@@ -118,7 +114,7 @@ public class firebaseDB {
             auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    int x = 5;
+                    String a = "ok";
                 }
             });
             fs.collection("users").document(email).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -132,10 +128,12 @@ public class firebaseDB {
                 public void onFailure(@NonNull Exception e) {
                     System.out.println("ERROR");
                     System.out.println(e.toString());
+                    String a = "not ok";
 
 
                 }
             });
+            System.out.println(a);
             return SIGNUP_RESULTS.SUCCESS;
         }
         return SIGNUP_RESULTS.EMAIL_EXISTS;
@@ -150,22 +148,19 @@ public class firebaseDB {
         {
             return false;
         }
-        firebaseDB.currentUser = new User(email, password, "", "", this.auth.getCurrentUser());
+        //firebaseDB.currentUser = new User(email, password, "", "","");
         return true;
     }
 
     public void logout()
     {
         this.auth.signOut();
+        firebaseDB.currentUser = null;
     }
-
-
 
 
     public boolean fullnameValid(String fullname)
     {
-
-
         if (fullname.length() == 0) {
             return false;
         }

@@ -16,13 +16,18 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/white">
-
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="back"
+            android:id="@+id/btnBack"
+            />
         <VideoView
             android:layout_width="200dp"
             android:layout_height="150dp"
-            android:id="@+id/video_chest_1"
+            android:id="@+id/video_1"
             android:layout_gravity="center"
-            android:visibility="invisible"
+            android:visibility="visible"
             />
         <TextView
             android:layout_width="match_parent"
@@ -32,9 +37,9 @@
         <VideoView
             android:layout_width="200dp"
             android:layout_height="150dp"
-            android:id="@+id/video_chest_2"
+            android:id="@+id/video_2"
             android:layout_gravity="center"
-            android:visibility="invisible"
+            android:visibility="visible"
             />
         <TextView
             android:layout_width="match_parent"
@@ -45,9 +50,9 @@
         <VideoView
             android:layout_width="200dp"
             android:layout_height="150dp"
-            android:id="@+id/video_chest_3"
+            android:id="@+id/video_3"
             android:layout_gravity="center"
-            android:visibility="invisible"
+            android:visibility="visible"
             />
         <TextView
             android:layout_width="match_parent"
@@ -58,9 +63,9 @@
         <VideoView
             android:layout_width="200dp"
             android:layout_height="150dp"
-            android:id="@+id/video_chest_4"
+            android:id="@+id/video_4"
             android:layout_gravity="center"
-            android:visibility="invisible"
+            android:visibility="visible"
             />
         <TextView
             android:layout_width="match_parent"
@@ -71,9 +76,9 @@
         <VideoView
             android:layout_width="200dp"
             android:layout_height="150dp"
-            android:id="@+id/video_chest_5"
+            android:id="@+id/video_5"
             android:layout_gravity="center"
-            android:visibility="invisible"
+            android:visibility="visible"
             />
         <TextView
             android:layout_width="match_parent"

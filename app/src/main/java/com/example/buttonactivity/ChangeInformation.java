@@ -65,7 +65,6 @@ public class ChangeInformation extends AppCompatActivity implements View.OnClick
                 StorageReference scheduleRef = storageRef.child("images/"+userEmail+".jpg");
                 // Delete the file that already exists to prevent loss of storage
                 //there's always a picture already existing.
-
                 scheduleRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -113,8 +112,8 @@ public class ChangeInformation extends AppCompatActivity implements View.OnClick
             {
                 //for gallery
                 //imgGallery.setImageURI(data.getData());
-                imageSchedule.setImageURI(data.getData());
                 imageUri = data.getData();
+                imageSchedule.setImageURI(data.getData());
                 changedProfile = true;
             }
         }
