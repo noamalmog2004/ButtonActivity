@@ -1,52 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
+    android:layout_height="wrap_content"
+    android:background="#3FAAB8"
     android:orientation="horizontal"
     android:padding="10dp">
 
-
-
-
     <TextView
         android:id="@+id/tvDate"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="DATE"
-        android:textColor="@color/black" />
+        android:layout_weight="2"
+        android:text="Date:"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:layout_marginRight="3dp"/>
 
     <TextView
         android:id="@+id/tvExer1"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="EXER1"
-        android:textColor="@color/black" />
+        android:layout_weight="3"
+        android:text="First Exercise:"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:layout_marginRight="3dp"/>
+
 
     <TextView
         android:id="@+id/tvExer2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="EXER2"
-        android:textColor="@color/black" />
+        android:layout_weight="3"
+        android:text="Second Exercise:"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:layout_marginRight="3dp"/>
 
     <TextView
         android:id="@+id/tvExer3"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="EXER3"
-        android:textColor="@color/black" />
+        android:layout_weight="3"
+        android:text="Third Exercise:"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:layout_marginRight="3dp"/>
+
 
     <TextView
         android:id="@+id/tvExer4"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="EXER4"
-        android:textColor="@color/black" />
+        android:layout_weight="3"
+        android:text="Fourth Exercise:"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:ellipsize="end"
+        />
 
 </LinearLayout>

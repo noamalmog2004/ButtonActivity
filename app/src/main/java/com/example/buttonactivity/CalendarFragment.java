@@ -43,6 +43,10 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class CalendarFragment extends Fragment implements View.OnClickListener {
 
@@ -129,10 +133,30 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
             Intent j = new Intent(getContext(), CreateTraining.class);
             startActivity(j);
         }
-        if (view == btnView)
-        {
-            Intent j = new Intent(getContext(), ViewTrainings.class);
-            startActivity(j);
+        if (view == btnView) {
+            firebaseDB db = new firebaseDB();
+            FirebaseFirestore f = db.fs;
+            String path = extractUsername(db.auth.getCurrentUser().getEmail());
+            Query query = f.collection("trainings").whereEqualTo("belongsTo",path);
+            query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        int count = task.getResult().size();
+                        if (count > 0) {
+                            // User has at least one training, launch the intent
+                            Intent intent = new Intent(getContext(), ViewTrainings.class);
+                            startActivity(intent);
+                        } else {
+                            // User has no training, show a message or take some other action
+                            Toast.makeText(getContext(), "No trainings planned!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else {
+                        Toast.makeText(getContext(), "error!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
         }
         if (view == btnSaveTraining) {
             String day = etDay.getText().toString();
@@ -143,42 +167,22 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
             String exercise3 = exercise3EditText.getText().toString();
             String exercise4 = exercise4EditText.getText().toString();
             boolean ok = true;
-            if(!exerciseMap.containsKey(exercise1) ||!exerciseMap.containsKey(exercise2)||!exerciseMap.containsKey(exercise3)||!exerciseMap.containsKey(exercise4) )
-            {
+            if (!exerciseMap.containsKey(exercise1) || !exerciseMap.containsKey(exercise2) || !exerciseMap.containsKey(exercise3) || !exerciseMap.containsKey(exercise4)) {
                 Toast.makeText(getContext(), "invalid id", Toast.LENGTH_SHORT).show();
                 ok = false;
             }
-
-//            if (isValidFutureDate(day, month, year) && ok) {
-                String date = year + "-" + month + "-" + day;
-                firebaseDB db = new firebaseDB();
-
-//                HashMap<String, String> hashMap = new HashMap<>();
-//                hashMap.put("Date", date);
-//                hashMap.put("Exercise1", exercise1);
-//                hashMap.put("Exercise2", exercise2);
-//                hashMap.put("Exercise3", exercise3);
-//                hashMap.put("Exercise4", exercise4);
-                TrainingManager trainingManager = new TrainingManager();
-                trainingManager.addTraining(db.auth.getCurrentUser().getEmail(), date, exerciseMap.get(exercise1), exerciseMap.get(exercise2), exerciseMap.get(exercise3), exerciseMap.get(exercise4));
-
-                //TODO: CREATE REALTIME FB DATABASE
-
-                //dbHelper.insertWorkout(date, exerciseMap.get(exercise1), exerciseMap.get(exercise2), exerciseMap.get(exercise3), exerciseMap.get(exercise4));
-                // updateCalendar();
-            //}
-            //else {
-                //Toast.makeText(getContext(), "dates are invalid", Toast.LENGTH_SHORT).show();
-            }
+            String date = year + "-" + month + "-" + day;
+            firebaseDB db = new firebaseDB();
+            TrainingManager trainingManager = new TrainingManager();
+            trainingManager.addTraining(db.auth.getCurrentUser().getEmail(), date, exerciseMap.get(exercise1), exerciseMap.get(exercise2), exerciseMap.get(exercise3), exerciseMap.get(exercise4));
         }
     }
-
-//    @RequiresApi(api = Build.VERSION_CODES.O)
-//    public static boolean isValidFutureDate(String day, String month, String year) {
-//        try {
-//            LocalDate date = LocalDate.parse(year + "-" + month + "-" + day);
-//            return date.isAfter(LocalDate.now());
-//        } catch (DateTimeParseException e) {
-//            return false;
-//        }
-//    }
+    public static String extractUsername(String email) {
+        int atIndex = email.indexOf("@");
+        if (atIndex >= 0) {
+            return email.substring(0, atIndex);
+        } else {
+            return null; // or throw an exception, depending on your needs
+        }
+    }
+}

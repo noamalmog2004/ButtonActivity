@@ -1,13 +1,20 @@
 package com.example.buttonactivity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,13 +36,17 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class profileFragment extends Fragment implements View.OnClickListener {
 
-
+    //for camera
+    private static final int CAMERA_REQUEST = 1;
+    private static final int CAMERA_PERMISSION_REQUEST_CODE = 1;
     //private FirebaseFirestore db;
     private firebaseDB db = new firebaseDB();
     private TextView textViewFullName;
@@ -43,14 +54,22 @@ public class profileFragment extends Fragment implements View.OnClickListener {
     private TextView textViewPassword;
     ImageView profile_picture;
     TextView tvName, tvAge, tvEmail, tvPassword, tvWeight;
-    Button btnChange;
+    Button btnChangeGallery,btnChangeCamera, btnSaveNew;
+    private final int GALLERY_REQ_CODE2 = 1000;
+    public ImageView imgGallery3;
+    public Uri imageUri3;
+    boolean changedPic=false;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
-        btnChange = v.findViewById(R.id.btnChange);
-        btnChange.setOnClickListener(this);
-
+        btnChangeGallery = v.findViewById(R.id.btnChangeGallery);
+        btnChangeGallery.setOnClickListener(this);
+        btnChangeCamera = v.findViewById(R.id.btnChangeCamera);
+        btnChangeCamera.setOnClickListener(this);
+        btnSaveNew= v.findViewById(R.id.btnSaveNew);
+        btnSaveNew.setOnClickListener(this);
         profile_picture = v.findViewById(R.id.profile_picture);
 
         tvName = v.findViewById(R.id.tvName);
@@ -95,8 +114,6 @@ public class profileFragment extends Fragment implements View.OnClickListener {
             e.printStackTrace();
         }
 
-
-
         db.fs.collection("users")
                 .whereEqualTo("email", userEmail)
                     .get()
@@ -128,10 +145,126 @@ public class profileFragment extends Fragment implements View.OnClickListener {
 
 @Override
     public void onClick(View view) {
-        if (view == btnChange)
+        if (view == btnChangeGallery)
         {
-            Intent i = new Intent(getActivity(), ChangeInformation.class);
-            startActivity(i);
+            Intent iGallery = new Intent(Intent.ACTION_PICK);
+            iGallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(iGallery, GALLERY_REQ_CODE2);
+        }
+        if (view == btnChangeCamera)
+        {
+            //todo: open camera and make pic
+            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                // Permission is already granted, launch camera
+                launchCamera();
+            } else {
+                // Permission is not granted, request it
+                requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_REQUEST_CODE);
+            }
+        }
+        if (view == btnSaveNew)
+        {
+            //TODO:SAVE NEW PIC TO FIREBASE AND DELTE OLD ONE
+            if(changedPic)
+            {
+                StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+                String userEmail = db.auth.getInstance().getCurrentUser().getEmail();
+                StorageReference scheduleRef = storageRef.child("images/"+userEmail+".jpg");
+                // Delete the file that already exists to prevent loss of storage
+                //there's always a picture already existing.
+                scheduleRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(getContext(), "file deleted successfully", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@org.checkerframework.checker.nullness.qual.NonNull Exception exception) {
+                        Toast.makeText(getContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+                //upload image
+                scheduleRef.putFile(imageUri3)
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                                //imageSchedule.setImageURI(null);
+                                Toast.makeText(getContext(), "Successfully uploaded", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@org.checkerframework.checker.nullness.qual.NonNull Exception e) {
+                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+
+            }
+            else
+            {
+                Toast.makeText(getContext(), "Didn't change your pic!", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == -1)
+        {
+            changedPic=true;
+            if (requestCode == GALLERY_REQ_CODE2)
+            {
+                imageUri3 = data.getData();
+                profile_picture.setImageURI(imageUri3);
+            }
+            if (requestCode == CAMERA_REQUEST)
+            {
+                Bundle extras = data.getExtras();
+                Bitmap imageBitmap = (Bitmap) extras.get("data");
+
+                String fileName = "my_image.jpg";
+                File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+                if (storageDir != null) {
+                    File imageFile = new File(storageDir, fileName);
+
+                    try {
+                        FileOutputStream fos = new FileOutputStream(imageFile);
+                        imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                        fos.flush();
+                        fos.close();
+
+                        imageUri3 = Uri.fromFile(imageFile);
+                        profile_picture.setImageURI(imageUri3);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+    // Method to launch camera
+    public void launchCamera() {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (cameraIntent.resolveActivity(requireContext().getPackageManager()) != null) {
+            startActivityForResult(cameraIntent, CAMERA_REQUEST);
+        } else {
+            Toast.makeText(getContext(), "No camera app available", Toast.LENGTH_SHORT).show();
+        }
+    }
+    // Handle the permission request result
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission is granted, launch camera
+                launchCamera();
+            } else {
+                // Permission is denied, show a toast message
+                Toast.makeText(getContext(), "Camera permission is required to use the camera", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

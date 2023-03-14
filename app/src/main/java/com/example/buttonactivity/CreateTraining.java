@@ -22,7 +22,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.TreeSet;
 
@@ -117,47 +120,36 @@ public class CreateTraining extends AppCompatActivity implements View.OnClickLis
             exercise4 = exerciseMap.get(exercise4);
 //            if (isValidFutureDate(day, month, year) && ok) {
             String date = year1 + "-" + month1 + "-" + day1;
-            firebaseDB db = new firebaseDB();
+            if (alertUserIfDateIsOld(date))
+            {
+                Toast.makeText(CreateTraining.this, "Choose a date in the future!", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                firebaseDB db = new firebaseDB();
+                String path = extractUsername(db.auth.getCurrentUser().getEmail());
 
-//                HashMap<String, String> hashMap = new HashMap<>();
-//                hashMap.put("Date", date);
-//                hashMap.put("Exercise1", exercise1);
-//                hashMap.put("Exercise2", exercise2);
-//                hashMap.put("Exercise3", exercise3);
-//                hashMap.put("Exercise4", exercise4);
-            //TrainingManager trainingManager = new TrainingManager();
-            //because Invalid Firebase Database path: yar123@gmail.com. Firebase Database paths must not contain '.', '#', '$', '[', or ']'
-            String path = extractUsername(db.auth.getCurrentUser().getEmail());
+                //trainingManager.addTraining(path, date, exerciseMap.get(exercise1), exerciseMap.get(exercise2), exerciseMap.get(exercise3), exerciseMap.get(exercise4));
 
-            //trainingManager.addTraining(path, date, exerciseMap.get(exercise1), exerciseMap.get(exercise2), exerciseMap.get(exercise3), exerciseMap.get(exercise4));
+                Training training = new Training(date, exercise1, exercise2, exercise3, exercise4, path);
+                FirebaseFirestore fs = db.fs;
+                fs
+                        .collection("trainings")
+                        .document(System.currentTimeMillis() + "")
+                        .set(training)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(CreateTraining.this, "good", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(CreateTraining.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 
-            Training training = new Training(date, exercise1, exercise2, exercise3, exercise4, path);
-            FirebaseFirestore fs = db.fs;
-            fs
-                    .collection("trainings")
-                    .document(System.currentTimeMillis() + "")
-                    .set(training)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            Toast.makeText(CreateTraining.this, "good", Toast.LENGTH_SHORT).show();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(CreateTraining.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-
-                }
-            });
-
-
-
-            //else {
-            //Toast.makeText(getContext(), "dates are invalid", Toast.LENGTH_SHORT).show();
-
-
-            //Intent j = new Intent(CreateTraining.this, MainActivity.class);
-           // startActivity(j);
+                    }
+                });
+            }
         }
         if (view == btnShowCal)
         {
@@ -178,7 +170,7 @@ public class CreateTraining extends AppCompatActivity implements View.OnClickLis
          DatePickerDialog dialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
              @Override
              public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                    text.setText("THE DATE U SELECTED: "+year+"/"+month+"/"+day);
+                    text.setText("THE DATE U SELECTED: "+year+"/"+(month+1)+"/"+day);
                     year1 = Integer.toString(year);
                     month1 = Integer.toString(month+1);
                     day1 = Integer.toString(day);
@@ -188,4 +180,16 @@ public class CreateTraining extends AppCompatActivity implements View.OnClickLis
          dialog.show();
     }
 
+    public boolean alertUserIfDateIsOld(String date1) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date;
+        try {
+            date = formatter.parse(date1);
+        } catch (ParseException e) {
+            // Handle the case where the date string is not in the expected format
+            return false;
+        }
+        Date currentDate = new Date();
+        return date.before(currentDate);
+    }
 }

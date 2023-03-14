@@ -36,10 +36,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     public ImageView imgGallery2, imageSchedule2;
     public Uri imageUri2;
     public boolean changedProfile = false;
-    ProgressDialog progressDialog;
-
-    // ...
-// Initialize Firebase Auth
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,9 +54,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         btnCamera2.setOnClickListener(this);
     }
     public void onClick(View view) {
-        //TODO: Copy stuff from friebaseDB in here to register here and not in firebaseDB
-        //TODO: Then only import validation functions
-        //TODO: GET HELP FROM MICHAL
         firebaseDB db = new firebaseDB();
         String fullname  = etFullname.getText().toString();
         String password = etPassword.getText().toString();
@@ -97,14 +90,15 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                         Toast.makeText(Register.this, e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
+                db.login(email,password);
+                Intent i = new Intent(Register.this, MainActivity.class);
+                startActivity(i);
             }
                 catch (Exception e){
                     Toast.makeText(Register.this, e.toString(), Toast.LENGTH_SHORT).show();
                 }
             //login before intent
-            db.login(email,password);
-            Intent i = new Intent(Register.this, MainActivity.class);
-            startActivity(i);
+
         }
         else if(!changedProfile && view == btnRegister)
         {
