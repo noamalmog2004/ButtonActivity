@@ -164,7 +164,6 @@ public class profileFragment extends Fragment implements View.OnClickListener {
         }
         if (view == btnSaveNew)
         {
-            //TODO:SAVE NEW PIC TO FIREBASE AND DELTE OLD ONE
             if(changedPic)
             {
                 StorageReference storageRef = FirebaseStorage.getInstance().getReference();
@@ -191,6 +190,7 @@ public class profileFragment extends Fragment implements View.OnClickListener {
 
                                 //imageSchedule.setImageURI(null);
                                 Toast.makeText(getContext(), "Successfully uploaded", Toast.LENGTH_SHORT).show();
+                                changedPic = false;
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -198,13 +198,11 @@ public class profileFragment extends Fragment implements View.OnClickListener {
                         Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
-
             }
             else
             {
                 Toast.makeText(getContext(), "Didn't change your pic!", Toast.LENGTH_SHORT).show();
             }
-
         }
     }
     @Override

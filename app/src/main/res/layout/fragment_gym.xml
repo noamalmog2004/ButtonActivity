@@ -9,7 +9,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".GymFragment"
-    android:background="#E6BD40"
+    android:background="@drawable/img"
     android:gravity="center"
     android:orientation="vertical"
     >

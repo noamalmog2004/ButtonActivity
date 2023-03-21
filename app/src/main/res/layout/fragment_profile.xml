@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#0000FF"
+    android:background="@drawable/img"
     android:padding="16dp">
 
     <ImageView
@@ -80,10 +80,9 @@
     <Button
         android:id="@+id/btnChangeGallery"
         android:layout_width="200dp"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_gravity="center"
-        android:text="Choose new pic from Gallery"
-        />
+        android:text="Choose new pic from Gallery" />
     <Button
         android:id="@+id/btnChangeCamera"
         android:layout_width="200dp"

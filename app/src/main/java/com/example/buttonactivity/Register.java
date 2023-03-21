@@ -97,8 +97,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 catch (Exception e){
                     Toast.makeText(Register.this, e.toString(), Toast.LENGTH_SHORT).show();
                 }
-            //login before intent
-
         }
         else if(!changedProfile && view == btnRegister)
         {

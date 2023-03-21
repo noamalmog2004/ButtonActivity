@@ -60,6 +60,10 @@ public class GymFragment extends Fragment implements View.OnClickListener {
         return v;
     }
 
+
+
+
+
     @Override
     public void onClick(View view) {
         //firebaseDB db = new firebaseDB();
@@ -70,34 +74,33 @@ public class GymFragment extends Fragment implements View.OnClickListener {
 //            View tempDialogView = getLayoutInflater().inflate(R.layout.dialog_chest, null, false);
 //            tempBuilder.setView(tempDialogView);
 //            AlertDialog tempAd = tempBuilder.create();
-//
 //            //launch dialog
 //            tempAd.show();
-            Intent k = new Intent(getActivity(), chest_videos.class);
+            Intent k = new Intent(getActivity(), VideosActivity.class);
             k.putExtra("type", "ch");
             startActivity(k);
         }
         if(view == btnBi)
         {
-            Intent k = new Intent(getActivity(), chest_videos.class);
+            Intent k = new Intent(getActivity(), VideosActivity.class);
             k.putExtra("type", "bi");
             startActivity(k);
         }
         if(view == btnTri)
         {
-            Intent k = new Intent(getActivity(), chest_videos.class);
+            Intent k = new Intent(getActivity(), VideosActivity.class);
             k.putExtra("type", "tr");
             startActivity(k);
         }
         if(view == btnLegs)
         {
-            Intent k = new Intent(getActivity(), chest_videos.class);
+            Intent k = new Intent(getActivity(), VideosActivity.class);
             k.putExtra("type", "le");
             startActivity(k);
         }
         if(view == btnBa)
         {
-            Intent k = new Intent(getActivity(), chest_videos.class);
+            Intent k = new Intent(getActivity(), VideosActivity.class);
             k.putExtra("type", "ba");
             startActivity(k);
         }

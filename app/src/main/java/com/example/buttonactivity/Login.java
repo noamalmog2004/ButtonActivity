@@ -52,11 +52,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         String password = etPassword.getText().toString();
         String email = etEmail.getText().toString();
 
-        //test:
-//        Intent i = new Intent(Login.this, MainActivity.class);
-//        startActivity(i);
-
-
         if (view == btnRegister1)
         {
             Intent k = new Intent(Login.this, Register.class);

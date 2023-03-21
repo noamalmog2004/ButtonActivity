@@ -2,7 +2,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bb"
+    android:background="@drawable/img"
     >
 
     <TextView
@@ -18,7 +18,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Our mission is to help you achieve your fitness goals. Our app provides a variety of workout videos to help you get in shape and stay healthy. With our app, you can:"
+        android:text="Our mission is to help you achieve your fitness goals. Our app provides a variety of workout videos to help you get in shape and stay healthy. With our app, you can:
+                       The app works like this: after wathcing the videos of the exercises you want to add to your training, remember each training's ID. Then when building your training, write the ID of each exercise you decided to add to your training."
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:paddingBottom="8dp" />
@@ -88,10 +89,10 @@
             android:id="@+id/start_anim_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="-39dp"
-            android:text="Move Me!"
-            android:layout_centerHorizontal="true"
             android:layout_below="@id/anim_image"
-            android:layout_marginTop="80dp"/>
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="-39dp"
+            android:text="Move Me!" />
     </RelativeLayout>
 </LinearLayout>
