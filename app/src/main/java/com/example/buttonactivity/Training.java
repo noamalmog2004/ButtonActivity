@@ -23,26 +23,26 @@ public class Training {
     }
 
     public String getDate() {
-        return date;
+        return this.date;
     }
 
     public String getExercise1() {
-        return exercise1;
+        return this.exercise1;
     }
 
     public String getExercise2() {
-        return exercise2;
+        return this.exercise2;
     }
 
     public String getExercise3() {
-        return exercise3;
+        return this.exercise3;
     }
 
     public String getExercise4() {
-        return exercise4;
+        return this.exercise4;
     }
 
-    public String getBelongsTo() {return belongsTo;}
+    public String getBelongsTo() {return this.belongsTo;}
 
 
 }

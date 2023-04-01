@@ -18,19 +18,28 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     profileFragment profileFragment = new profileFragment();
     HomeFragment homeFragment = new HomeFragment();
-    //settingsFragment settingsFragment = new settingsFragment();
     GymFragment gymFragment = new GymFragment();
     CalendarFragment calendarFragment = new CalendarFragment();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent takeit = getIntent();
+        String whereToGo = takeit.getStringExtra("whereToGo");
+        if (whereToGo.equals("goToCal"))
+        {
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,calendarFragment).commit();
+        }
+        else if (whereToGo.equals("goToGym"))
+        {
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,gymFragment).commit();
 
-
-
+        }
+        else
+        {
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,homeFragment).commit();
+        }
         bottomNavigationView = findViewById(R.id.bottom_navigation);
-        getSupportFragmentManager().beginTransaction().replace(R.id.container,homeFragment).commit();
-
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item)
@@ -43,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.logout:
                         firebaseDB db = new firebaseDB();
                         db.logout();
-                        //onBackPressed();
                         Intent intent = new Intent(MainActivity.this, Login.class);
                         startActivity(intent);
                         return true;

@@ -85,14 +85,17 @@
             android:src="@drawable/minion"
             android:visibility="visible" />
 
-        <Button
+
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/start_anim_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="45dp"
             android:layout_below="@id/anim_image"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="80dp"
             android:layout_marginEnd="-39dp"
-            android:text="Move Me!" />
+            android:text="Move Me!"
+            android:background="@drawable/button_background"
+            />
     </RelativeLayout>
 </LinearLayout>

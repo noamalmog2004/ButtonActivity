@@ -59,11 +59,6 @@ public class GymFragment extends Fragment implements View.OnClickListener {
         btnBi.setOnClickListener(this);
         return v;
     }
-
-
-
-
-
     @Override
     public void onClick(View view) {
         //firebaseDB db = new firebaseDB();

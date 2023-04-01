@@ -10,9 +10,12 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,15 +36,12 @@ public class CreateTraining extends AppCompatActivity implements View.OnClickLis
 
     private TextView text;
     private Button btnShowCal;
-    Button btnAdd, btnSaveTraining, btnView;
-    EditText etDay, etMonth, etYear;
+    Button btnSaveTraining;
     private EditText exercise1EditText;
     private EditText exercise2EditText;
     private EditText exercise3EditText;
     private EditText exercise4EditText;
     public String day1, month1, year1;
-
-    //   private GymAdapter adapter;
 
     HashMap<String, String> exerciseMap = new HashMap<String, String>();
     @Override
@@ -74,11 +74,6 @@ public class CreateTraining extends AppCompatActivity implements View.OnClickLis
         exerciseMap.put("le4", "Squats");
         exerciseMap.put("le5", "Calve Raises");
 
-
-//        etDay = findViewById(R.id.etDay);
-//        etMonth = findViewById(R.id.etMonth);
-//        etYear = findViewById(R.id.etYear);
-
         exercise1EditText = findViewById(R.id.id1);
         exercise2EditText = findViewById(R.id.id2);
         exercise3EditText = findViewById(R.id.id3);
@@ -92,18 +87,12 @@ public class CreateTraining extends AppCompatActivity implements View.OnClickLis
 
         text = findViewById(R.id.text);
 
-
-
     }
 
     @Override
     public void onClick(View view) {
         if (view == btnSaveTraining)
         {
-//            String day = etDay.getText().toString();
-//            String month = etMonth.getText().toString();
-//            String year = etYear.getText().toString();
-
             String exercise1 = exercise1EditText.getText().toString();
             String exercise2 = exercise2EditText.getText().toString();
             String exercise3 = exercise3EditText.getText().toString();
@@ -119,12 +108,16 @@ public class CreateTraining extends AppCompatActivity implements View.OnClickLis
             exercise3 = exerciseMap.get(exercise3);
             exercise4 = exerciseMap.get(exercise4);
 //            if (isValidFutureDate(day, month, year) && ok) {
+            if (year1 == null||month1 == null||day1 == null)
+                ok=false;
+
             String date = year1 + "-" + month1 + "-" + day1;
+
             if (alertUserIfDateIsOld(date))
             {
                 Toast.makeText(CreateTraining.this, "Choose a date in the future!", Toast.LENGTH_SHORT).show();
             }
-            else
+            if(ok)
             {
                 firebaseDB db = new firebaseDB();
                 String path = extractUsername(db.auth.getCurrentUser().getEmail());
@@ -141,6 +134,9 @@ public class CreateTraining extends AppCompatActivity implements View.OnClickLis
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 Toast.makeText(CreateTraining.this, "good", Toast.LENGTH_SHORT).show();
+                                Intent k = new Intent(CreateTraining.this, MainActivity.class);
+                                k.putExtra("whereToGo", "goToCal");
+                                startActivity(k);
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -149,6 +145,10 @@ public class CreateTraining extends AppCompatActivity implements View.OnClickLis
 
                     }
                 });
+            }
+            else
+            {
+                Toast.makeText(CreateTraining.this, "pick a date", Toast.LENGTH_SHORT).show();
             }
         }
         if (view == btnShowCal)

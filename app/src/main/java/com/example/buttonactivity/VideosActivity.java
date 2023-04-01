@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,10 +17,13 @@ import android.widget.VideoView;
 
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.badge.BadgeUtils;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class VideosActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -51,49 +57,54 @@ public class VideosActivity extends AppCompatActivity implements View.OnClickLis
         mediaController.setAnchorView(video_1);
         video_1.setMediaController(mediaController);
 
-
-
         Intent takeit = getIntent();
         String type = takeit.getStringExtra("type");
         //to check which button was clicked on
         // Set the media controller for the video view
+
         MediaController mediaController1 = new MediaController(this);
-        mediaController.setAnchorView(video_1);
-        video_1.setMediaController(mediaController);
+        mediaController1.setAnchorView(video_1);
+        video_1.setMediaController(mediaController1);
+//
+//        MediaController mediaController2 = new MediaController(this);
+//        mediaController2.setAnchorView(video_2);
+//        video_2.setMediaController(mediaController2);
+//
+//        MediaController mediaController3 = new MediaController(this);
+//        mediaController3.setAnchorView(video_3);
+//        video_3.setMediaController(mediaController3);
+//
+//        MediaController mediaController4 = new MediaController(this);
+//        mediaController4.setAnchorView(video_4);
+//        video_4.setMediaController(mediaController4);
+//
+//        MediaController mediaController5 = new MediaController(this);
+//        mediaController5.setAnchorView(video_5);
+//        video_5.setMediaController(mediaController5);
 
-        MediaController mediaController2 = new MediaController(this);
-        mediaController2.setAnchorView(video_2);
-        video_2.setMediaController(mediaController2);
+        //TODO:check with ANDROID
+        //String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.vid1;
 
-        MediaController mediaController3 = new MediaController(this);
-        mediaController3.setAnchorView(video_3);
-        video_3.setMediaController(mediaController3);
-
-        MediaController mediaController4 = new MediaController(this);
-        mediaController4.setAnchorView(video_4);
-        video_4.setMediaController(mediaController4);
-
-        MediaController mediaController5 = new MediaController(this);
-        mediaController5.setAnchorView(video_5);
-        video_5.setMediaController(mediaController5);
-
-        //TODO:test
-        String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.vid1;
-
-        String videoUrl="";
+        //String videoUrl="";
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
         StorageReference videoRef = storageRef.child("videos/myvideo.mp4");
+
+
         videoRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
-            public void onSuccess(Uri downloadUrl) {
-                // Use download Url to show the video in your app
-                String videoUrl= downloadUrl.toString();
-                video_1.setVideoURI(Uri.parse(videoUrl));
+            public void onSuccess(Uri uri) {
+                // Download the video from Firebase Storage.
+                Uri videoUri = Uri.parse(uri.toString());
+                video_1.setVideoURI(videoUri);
+                // Start playing the video.
                 video_1.start();
-                Toast.makeText(VideosActivity.this, videoUrl, Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors here.
             }
         });
-        //video_1.setVideoURI(Uri.parse(videoUrl));
 
 
 //        switch (type)
@@ -216,6 +227,7 @@ public class VideosActivity extends AppCompatActivity implements View.OnClickLis
         if (view == btnBack)
         {
             Intent j = new Intent(VideosActivity.this, MainActivity.class);
+            j.putExtra("whereToGo","goToGym");
             startActivity(j);
         }
     }

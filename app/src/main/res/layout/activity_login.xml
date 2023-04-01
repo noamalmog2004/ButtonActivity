@@ -23,7 +23,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center_horizontal"
-            android:padding="24dp">
+            android:padding="24dp"
+            android:background="@drawable/button_background">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -66,10 +67,12 @@
                 />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-    <Button
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnRegister1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginHorizontal="40dp"
-        android:text="Click me to sign up!" />
+        android:text="Click me to sign up!"
+        android:background="@drawable/button_background"/>
 </LinearLayout>

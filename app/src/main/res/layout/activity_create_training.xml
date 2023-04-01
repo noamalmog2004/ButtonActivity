@@ -52,15 +52,17 @@
 <!--            android:hint="Enter year"-->
 <!--            android:textColor="@color/black"-->
 <!--            android:textColorHint="@color/black" />-->
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnShowCal"
             android:layout_width="120dp"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_below="@id/tvTitle"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
+            android:background="@drawable/button_background"
             android:gravity="center"
             android:text="PICK DATE" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="20dp"
@@ -72,19 +74,27 @@
             android:gravity="center"
             android:layout_marginTop="15dp"/>
 
+<!--        <Spinner-->
+<!--            android:id="@+id/spinner1"-->
+<!--            android:layout_width="300dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_below="@id/text"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            style="sty"-->
+<!--            />-->
         <EditText
             android:id="@+id/id1"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/btnShowCal"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="35dp"
             android:hint="Enter id of 1. training"
             android:minHeight="48dp"
             android:textColor="@color/black"
-            android:textColorHint="@color/black" />
+            android:textColorHint="@color/black"
+            />
 
-        />
 
         <EditText
             android:id="@+id/id2"
@@ -128,13 +138,15 @@
         />
         />
 
-        <Button
+
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnSaveTraining"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
             android:layout_below="@id/id4"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
+            android:background="@drawable/button_background"
             android:text="save" />
     </RelativeLayout>
 </ScrollView>

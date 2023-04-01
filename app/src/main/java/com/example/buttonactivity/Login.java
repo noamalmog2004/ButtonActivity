@@ -68,6 +68,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             {
                 Toast.makeText(Login.this, "email exists!!!", Toast.LENGTH_SHORT).show();
                 Intent j = new Intent(Login.this, MainActivity.class);
+                j.putExtra("whereToGo","home");
                 startActivity(j);
             }
             else

@@ -2,4 +2,32 @@
     <string name="app_name">ButtonActivity</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="your_array_name">
+        <item>Seated Curls</item>
+        <item>Hammer Curls</item>
+        <item>Barbel Curls</item>
+        <item>Chin Ups</item>
+        <item>Reverse Grip Curls</item>
+        <item>Bench Press</item>
+        <item>Pec Flies</item>
+        <item>Cable Flies</item>
+        <item>Push Ups</item>
+        <item>Diamond Push Ups</item>
+        <item>Triceps Extensions</item>
+        <item>Jacksons</item>
+        <item>Dips</item>
+        <item>Skull Crushers</item>
+        <item>Tricep Press Machine</item>
+        <item>Lat Pulldown</item>
+        <item>Closed Lat Pulldown</item>
+        <item>Rows</item>
+        <item>Pull Ups</item>
+        <item>Closed Pull Ups</item>
+        <item>Leg Extensions</item>
+        <item>Hamstring Pulls</item>
+        <item>Bulgarian Splits</item>
+        <item>Squats</item>
+        <item>Calve Raises</item>
+    </string-array>
 </resources>

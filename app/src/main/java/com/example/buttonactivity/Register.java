@@ -36,6 +36,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     public ImageView imgGallery2, imageSchedule2;
     public Uri imageUri2;
     public boolean changedProfile = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,63 +54,60 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         btnCamera2 = findViewById(R.id.btnCamera2);
         btnCamera2.setOnClickListener(this);
     }
+
     public void onClick(View view) {
         firebaseDB db = new firebaseDB();
-        String fullname  = etFullname.getText().toString();
+        String fullname = etFullname.getText().toString();
         String password = etPassword.getText().toString();
         String email = etEmail.getText().toString();
         String age = etAge.getText().toString();
         String weight = etWeight.getText().toString();
         if (view == btnRegister && changedProfile) {
-//            if (!(db.fullnameValid(fullname)))
-//                Toast.makeText(getApplicationContext(), "Full name is not valid", Toast.LENGTH_SHORT).show();
-//            else if (!(db.passwordValid(password)))
-//                Toast.makeText(getApplicationContext(), "Password is not valid", Toast.LENGTH_SHORT).show();
-//            else if (!(db.emailValid(email)))
-//                Toast.makeText(getApplicationContext(), "Email is not valid", Toast.LENGTH_SHORT).show();
-//            else if (!(db.usernameValid(username)))
-//                Toast.makeText(getApplicationContext(), "username is not valid", Toast.LENGTH_SHORT).show();
-//            else {
-            try {
+            String message = checkCreds(age,weight,email,password,fullname);
+            if (message.equals("good")) {
+                try {
 
-                db.register(email, password, age, weight, fullname);
-                StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-                //String userEmail = db.auth.getInstance().getCurrentUser().getEmail();
-                StorageReference scheduleRef = storageRef.child("images/" + email+ ".jpg");
-                scheduleRef.putFile(imageUri2)
-                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    db.register(email, password, age, weight, fullname);
+                    StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+                    //String userEmail = db.auth.getInstance().getCurrentUser().getEmail();
+                    StorageReference scheduleRef = storageRef.child("images/" + email + ".jpg");
+                    scheduleRef.putFile(imageUri2)
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                                imgGallery2.setImageURI(null);
-                                Toast.makeText(Register.this, "Successfully uploaded", Toast.LENGTH_SHORT).show();
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Register.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
-                db.login(email,password);
-                Intent i = new Intent(Register.this, MainActivity.class);
-                startActivity(i);
-            }
-                catch (Exception e){
+                                    imgGallery2.setImageURI(null);
+                                    Toast.makeText(Register.this, "Successfully uploaded", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(Register.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    db.login(email, password);
+                    Intent i = new Intent(Register.this, MainActivity.class);
+                    i.putExtra("whereToGo", "home");
+                    startActivity(i);
+                } catch (Exception e) {
                     Toast.makeText(Register.this, e.toString(), Toast.LENGTH_SHORT).show();
                 }
+            }
+            else
+            {
+                //message form the checkCreds func
+                Toast.makeText(Register.this ,message, Toast.LENGTH_SHORT).show();
+            }
         }
-        else if(!changedProfile && view == btnRegister)
-        {
+        else if (!changedProfile && view == btnRegister) {
             Toast.makeText(Register.this, "You must pick a profile picture!", Toast.LENGTH_SHORT).show();
 
         }
-        if (view == btnBack)
-        {
+        if (view == btnBack) {
             Intent i = new Intent(Register.this, Login.class);
             startActivity(i);
         }
-        if(view == btnCamera2)
-        {
+        if (view == btnCamera2) {
             Intent iGallery = new Intent(Intent.ACTION_PICK);
             iGallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(iGallery, GALLERY_REQ_CODE2);
@@ -120,10 +118,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK)
-        {
-            if (requestCode == GALLERY_REQ_CODE2)
-            {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == GALLERY_REQ_CODE2) {
                 //for gallery
                 //imgGallery.setImageURI(data.getData());
                 imageUri2 = data.getData();
@@ -132,6 +128,39 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             }
         }
     }
+
+    public static String checkCreds(String age, String weight, String email, String password, String fullname) {
+        firebaseDB db = new firebaseDB(); // replace with your database object
+
+
+        if (fullname.isEmpty())
+            return "fullname is empty";
+        else if (!db.fullnameValid(fullname))
+            return "fullname is not valid";
+
+        if (password.isEmpty())
+            return "password is empty";
+        else if (!db.passwordValid(password))
+            return "password is not valid";
+
+        if (age.isEmpty())
+            return "age is empty";
+        else if (!db.ageValid(age))
+            return "age is not valid";
+
+        if (email.isEmpty())
+            return "email is empty";
+        else if (!db.emailValid(email))
+            return "email is not valid";
+
+        if (weight.isEmpty())
+            return "weight is empty";
+        else if (!db.weightValid(weight))
+            return "weight is not valid";
+
+        return "good";
+    }
+
 
 
 }

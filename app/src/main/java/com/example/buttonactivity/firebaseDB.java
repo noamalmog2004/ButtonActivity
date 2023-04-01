@@ -184,20 +184,11 @@ public class firebaseDB {
     public boolean passwordValid(String password)
     {
         //this.auth.createUserWithEmailAndPassword(email, password);
-        String checkPassword = "^" +
-                "(?=.*[0-9])" +         //at least 1 digit
-                "(?=.*[a-z])" +         //at least 1 lower case letter
-                "(?=.*[A-Z])" +         //at least 1 upper case letter
-                "(?=.*[a-zA-Z])" +      //any letter
-                "(?=S+$)" +           //no white spaces
-                ".{4,}" +               //at least 4 characters
-                "$";
         if (password.isEmpty())
             return false;
-        else if (!password.matches(checkPassword))
+        else if (password.length() < 6)
             return false;
-        else
-            return true;
+        return true;
     }
     public boolean ageValid(String age)
     {
@@ -212,15 +203,13 @@ public class firebaseDB {
         }
         return true;
     }
-    class UsernameValidator {
-        public static final String regularExpression = "^[a-zA-Z][a-zA-Z0-9_]{6,19}$";
-    }
-    public boolean usernameValid(String userName)
-    {
-        if (userName.matches(UsernameValidator.regularExpression)) {
-            return true;
+    public boolean weightValid(String weight) {
+        try {
+            double weightValue = Double.parseDouble(weight);
+            return weightValue > 0 && weightValue <= 250;
+        } catch (NumberFormatException e) {
+            return false;
         }
-        return false;
     }
 
 }

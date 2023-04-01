@@ -125,7 +125,7 @@ public class ViewTrainings extends AppCompatActivity implements EventListener<Qu
                 String ex3 = doc.getString("exercise3");
                 String ex4 = doc.getString("exercise4");
 
-                Training training = new Training(date, "1."+ex1, "1."+ex2, "1."+ex3, "1."+ex4, path);
+                Training training = new Training(date, "1."+ex1, "2."+ex2, "3."+ex3, "4."+ex4, path);
 
                 trainingArrayList.add(training);
             }
