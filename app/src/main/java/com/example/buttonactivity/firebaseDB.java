@@ -41,13 +41,8 @@ public class firebaseDB {
     static enum SIGNUP_RESULTS {
         SUCCESS,
         EMAIL_EXISTS,
-        INVALID_USERNAME,
-        INVALID_PASSWORD,
-        INVALID_NAME,
-
     }
     class User {
-        public String userId;
         public String email, password, fullName, weight, age;
         public FirebaseUser user;
 
@@ -70,36 +65,6 @@ public class firebaseDB {
         this.firebaseStorage = FirebaseStorage.getInstance();
         this.fd = FirebaseDatabase.getInstance();
     }
-
-    public void addFile(Uri file)
-    {
-        StorageReference storageRef = this.firebaseStorage.getReference();
-
-        // Create a reference to "mountains.jpg"
-        StorageReference mountainsRef = storageRef.child("profile/");
-
-        // While the file names are the same, the references point to different files
-
-        //mountainsRef.getName().equals(mountainsRef.getName());    // true
-        //mountainsRef.getPath().equals(mountainsRef.getPath());    // false
-        mountainsRef.putFile(file).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                System.out.println("Made it");
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                System.out.println("Error");
-
-            }
-        });
-        //StorageReference pathReference = storageRef.child("profile/MemeKing.png");
-
-        // Create a reference to a file from a Cloud Storage URI
-       // StorageReference gsReference = this.firebaseStorage.getReferenceFromUrl("gs://finalproject-3b98c.appspot.com/profile/MemeKing.png");
-    }
-
 
 
     public SIGNUP_RESULTS register(String email, String password, String age, String weight, String fullname)

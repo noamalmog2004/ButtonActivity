@@ -47,16 +47,13 @@ public class profileFragment extends Fragment implements View.OnClickListener {
     //for camera
     private static final int CAMERA_REQUEST = 1;
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 1;
-    //private FirebaseFirestore db;
     private firebaseDB db = new firebaseDB();
-    private TextView textViewFullName;
-    private TextView textViewEmail;
-    private TextView textViewPassword;
+    TextView textViewEmail;
+    TextView textViewPassword;
+    TextView tvName, tvAge, tvWeight;
     ImageView profile_picture;
-    TextView tvName, tvAge, tvEmail, tvPassword, tvWeight;
     Button btnChangeGallery,btnChangeCamera, btnSaveNew;
     private final int GALLERY_REQ_CODE2 = 1000;
-    public ImageView imgGallery3;
     public Uri imageUri3;
     boolean changedPic=false;
 

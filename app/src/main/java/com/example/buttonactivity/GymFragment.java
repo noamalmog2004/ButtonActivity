@@ -30,23 +30,11 @@ import java.io.IOException;
 
 public class GymFragment extends Fragment implements View.OnClickListener {
 
-
-    //public File localFile;
-    firebaseDB f = new firebaseDB();
     Button btnChest, btnTri, btnBi, btnLegs, btnBa;
-    //Button btnBackToGym1, btnBackToGym2, btnBackToGym3, btnBackToGym4, btnBackToGym5;
-    //VideoView video_chest_1,video2,video3,video4,video5, testVideo;
-    //String uriPath;
-    //Uri uri;
-    //int idVideo, idVideo2, idVideo3, idVideo4, idVideo5;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v =  inflater.inflate(R.layout.fragment_gym, container, false);
-        View vAlert =  inflater.inflate(R.layout.dialog_chest, container, false);
-
-        // btnBackToGym1 = vAlert.findViewById(R.id.btnBackToGym1);
-        //btnBackToGym1.setOnClickListener(this);
         btnChest = v.findViewById(R.id.button);
         btnChest.setOnClickListener(this);
         btnTri = v.findViewById(R.id.button2);
@@ -61,16 +49,8 @@ public class GymFragment extends Fragment implements View.OnClickListener {
     }
     @Override
     public void onClick(View view) {
-        //firebaseDB db = new firebaseDB();
-        //tempAd.setCancelable(false);
         if (view == btnChest)
         {
-//            AlertDialog.Builder tempBuilder = new AlertDialog.Builder(getActivity());
-//            View tempDialogView = getLayoutInflater().inflate(R.layout.dialog_chest, null, false);
-//            tempBuilder.setView(tempDialogView);
-//            AlertDialog tempAd = tempBuilder.create();
-//            //launch dialog
-//            tempAd.show();
             Intent k = new Intent(getActivity(), VideosActivity.class);
             k.putExtra("type", "ch");
             startActivity(k);

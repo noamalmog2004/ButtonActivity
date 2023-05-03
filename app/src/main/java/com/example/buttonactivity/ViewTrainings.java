@@ -46,7 +46,8 @@ public class ViewTrainings extends AppCompatActivity implements EventListener<Qu
     private ListView trainingListView;
     private TrainingsAdapter adapter;
     private firebaseDB db = new firebaseDB();
-    public String path;@Override
+    public String path;
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_trainings);

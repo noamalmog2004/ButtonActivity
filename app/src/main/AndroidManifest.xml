@@ -29,15 +29,6 @@
             android:name=".VideosActivity"
             android:exported="true" />
         <activity
-            android:name=".ChangeInformation"
-            android:exported="true" />
-        <activity
-            android:name=".SecondActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ChestActivitiy"
-            android:exported="true" />
-        <activity
             android:name=".Register"
             android:exported="true" />
         <activity

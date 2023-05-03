@@ -30,10 +30,9 @@ import java.io.File;
 public class Register extends AppCompatActivity implements View.OnClickListener {
 
     Button btnRegister, btnBack, btnCamera2;
-    public EditText etPassword, etEmail, etFullname, etUsername, etAge, etWeight;
-    private FirebaseAuth mAuth;
+    public EditText etPassword, etEmail, etFullname, etAge, etWeight;
     private final int GALLERY_REQ_CODE2 = 1000;
-    public ImageView imgGallery2, imageSchedule2;
+    public ImageView imgGallery2;
     public Uri imageUri2;
     public boolean changedProfile = false;
 
@@ -68,9 +67,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 try {
 
                     db.register(email, password, age, weight, fullname);
-                    StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-                    //String userEmail = db.auth.getInstance().getCurrentUser().getEmail();
-                    StorageReference scheduleRef = storageRef.child("images/" + email + ".jpg");
+                    StorageReference storageRef = FirebaseStorage.getInstance().getReference();StorageReference scheduleRef = storageRef.child("images/" + email + ".jpg");
                     scheduleRef.putFile(imageUri2)
                             .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override

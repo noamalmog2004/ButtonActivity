@@ -50,18 +50,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public class CalendarFragment extends Fragment implements View.OnClickListener {
 
-    Button btnAdd, btnSaveTraining, btnView;
-    EditText etDay, etMonth, etYear;
-    private Calendar calendar = Calendar.getInstance();
-
-    private EditText dateEditText;
-    private EditText exercise1EditText;
-    private EditText exercise2EditText;
-    private EditText exercise3EditText;
-    private EditText exercise4EditText;
-    private Button saveButton;
-    private RecyclerView recyclerView;
-    //   private GymAdapter adapter;
+    Button btnAdd, btnView;
 
     HashMap<String, String> exerciseMap = new HashMap<String, String>();
 
@@ -102,31 +91,10 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
         btnAdd.setOnClickListener(this);
         btnView = v.findViewById(R.id.btnView);
         btnView.setOnClickListener(this);
-        View vAlert = inflater.inflate(R.layout.dialog_add_training, container, false);
-        etDay = vAlert.findViewById(R.id.etDay);
-        etMonth = vAlert.findViewById(R.id.etMonth);
-        etYear = vAlert.findViewById(R.id.etYear);
-        btnSaveTraining = vAlert.findViewById(R.id.btnSaveTraining);
-        btnSaveTraining.setOnClickListener(this);
-        exercise1EditText = vAlert.findViewById(R.id.id1);
-        exercise2EditText = vAlert.findViewById(R.id.id2);
-        exercise3EditText = vAlert.findViewById(R.id.id3);
-        exercise4EditText = vAlert.findViewById(R.id.id4);
-
-
-        //adapter = new GymAdapter(getActivity(), null);
-        //recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        // recyclerView.setAdapter(adapter);
-
-
-//        dbHelper = new GymDatabaseHelper(getContext());
-//        updateCalendar();
 
 
         return v;
     }
-
-    //@RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onClick(View view) {
         if (view == btnAdd) {
@@ -157,24 +125,6 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
                     }
                 }
             });
-        }
-        if (view == btnSaveTraining) {
-            String day = etDay.getText().toString();
-            String month = etMonth.getText().toString();
-            String year = etYear.getText().toString();
-            String exercise1 = exercise1EditText.getText().toString();
-            String exercise2 = exercise2EditText.getText().toString();
-            String exercise3 = exercise3EditText.getText().toString();
-            String exercise4 = exercise4EditText.getText().toString();
-            boolean ok = true;
-            if (!exerciseMap.containsKey(exercise1) || !exerciseMap.containsKey(exercise2) || !exerciseMap.containsKey(exercise3) || !exerciseMap.containsKey(exercise4)) {
-                Toast.makeText(getContext(), "invalid id", Toast.LENGTH_SHORT).show();
-                ok = false;
-            }
-            String date = year + "-" + month + "-" + day;
-            firebaseDB db = new firebaseDB();
-            TrainingManager trainingManager = new TrainingManager();
-            trainingManager.addTraining(db.auth.getCurrentUser().getEmail(), date, exerciseMap.get(exercise1), exerciseMap.get(exercise2), exerciseMap.get(exercise3), exerciseMap.get(exercise4));
         }
     }
     public static String extractUsername(String email) {
