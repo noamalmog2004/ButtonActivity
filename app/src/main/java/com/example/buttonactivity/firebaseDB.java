@@ -88,16 +88,16 @@ public class firebaseDB {
                     System.out.println("MADE IT");
                 }
             })
-            .addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    System.out.println("ERROR");
-                    System.out.println(e.toString());
-                    String a = "not ok";
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            System.out.println("ERROR");
+                            System.out.println(e.toString());
+                            String a = "not ok";
 
 
-                }
-            });
+                        }
+                    });
             System.out.println(a);
             return SIGNUP_RESULTS.SUCCESS;
         }
@@ -123,20 +123,25 @@ public class firebaseDB {
         firebaseDB.currentUser = null;
     }
 
+    public boolean fullnameValid(String fullName) {
+        // Split the full name into first and last name
+        String[] names = fullName.trim().split("\\s+");
 
-    public boolean fullnameValid(String fullname)
-    {
-        if (fullname.length() == 0) {
+        // Check if there are exactly two names
+        if (names.length != 2) {
             return false;
         }
-        for (int i = 0; i < fullname.length(); i++) {
-            if (!(fullname.charAt(i) >= 'a' && fullname.charAt(i) <= 'z' || fullname.charAt(i) >= 'A' && fullname.charAt(i) <= 'Z')) {
+
+        // Check if each name is non-empty and contains only letters
+        for (String name : names) {
+            if (name.isEmpty() || !name.matches("[a-zA-Z]+")) {
                 return false;
             }
         }
+
         return true;
     }
-    public  boolean emailValid(String email)
+    public boolean emailValid(String email)
     {
         String checkEmail = "[a-zA-Z0-9._-]+@[a-z]+.+[a-z]+";
         if (email.isEmpty())
@@ -176,5 +181,4 @@ public class firebaseDB {
             return false;
         }
     }
-
 }

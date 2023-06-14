@@ -42,7 +42,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class profileFragment extends Fragment implements View.OnClickListener {
+    public class profileFragment extends Fragment implements View.OnClickListener {
 
     //for camera
     private static final int CAMERA_REQUEST = 1;

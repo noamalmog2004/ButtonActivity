@@ -115,6 +115,7 @@ public class CreateTraining extends AppCompatActivity implements View.OnClickLis
 
             if (alertUserIfDateIsOld(date))
             {
+                ok = false;
                 Toast.makeText(CreateTraining.this, "Choose a date in the future!", Toast.LENGTH_SHORT).show();
             }
             if(ok)
@@ -148,7 +149,7 @@ public class CreateTraining extends AppCompatActivity implements View.OnClickLis
             }
             else
             {
-                Toast.makeText(CreateTraining.this, "pick a date", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateTraining.this, "pick a valid date", Toast.LENGTH_SHORT).show();
             }
         }
         if (view == btnShowCal)

@@ -1,0 +1,181 @@
+@startuml
+class com.example.buttonactivity.Login {
+~ Button btnRegister1
+~ EditText etEmail
+~ Button btnLogin
+# void onCreate(Bundle)
++ void onClick(View)
+}
+class com.example.buttonactivity.Training {
+- String date
+- String exercise1
+- String exercise2
+- String exercise3
+- String exercise4
+- String belongsTo
++ <<Create>> Training()
++ <<Create>> Training(String,String,String,String,String,String)
++ String getDate()
++ String getExercise1()
++ String getExercise2()
++ String getExercise3()
++ String getExercise4()
++ String getBelongsTo()
+}
+class com.example.buttonactivity.CreateTraining {
+- TextView text
+- Button btnShowCal
+~ Button btnSaveTraining
+- EditText exercise1EditText
+- EditText exercise2EditText
+- EditText exercise3EditText
+- EditText exercise4EditText
++ String day1
+~ HashMap<String,String> exerciseMap
+# void onCreate(Bundle)
++ void onClick(View)
++ {static} String extractUsername(String)
+- void openDialog()
++ boolean alertUserIfDateIsOld(String)
+}
+class com.example.buttonactivity.VideosActivity {
+~ ImageView img1
+~ TextView ds1
+~ Button btnBack
+# void onCreate(Bundle)
++ void onClick(View)
+}
+class com.example.buttonactivity.flashScreen {
+~ TextView appname
+~ LottieAnimationView lottie
+# void onCreate(Bundle)
+}
+class com.example.buttonactivity.PushNotificationService {
++ void onMessageReceived(RemoteMessage)
+}
+class com.example.buttonactivity.GymFragment {
+~ Button btnChest
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onClick(View)
+}
+class com.example.buttonactivity.MainActivity {
+~ BottomNavigationView bottomNavigationView
+~ profileFragment profileFragment
+~ HomeFragment homeFragment
+~ GymFragment gymFragment
+~ CalendarFragment calendarFragment
+# void onCreate(Bundle)
+}
+class com.example.buttonactivity.CalendarFragment {
+~ Button btnAdd
+~ HashMap<String,String> exerciseMap
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onClick(View)
++ {static} String extractUsername(String)
+}
+class com.example.buttonactivity.firebaseDB {
++ FirebaseAuth auth
++ FirebaseFirestore fs
++ FirebaseStorage firebaseStorage
++ FirebaseDatabase fd
++ {static} User currentUser
++ <<Create>> firebaseDB()
++ SIGNUP_RESULTS register(String,String,String,String,String)
++ boolean login(String,String)
++ void logout()
++ boolean fullnameValid(String)
++ boolean emailValid(String)
++ boolean passwordValid(String)
++ boolean ageValid(String)
++ boolean weightValid(String)
+}
+enum com.example.buttonactivity.SIGNUP_RESULTS {
++  SUCCESS
++  EMAIL_EXISTS
+}
+class com.example.buttonactivity.firebaseDB$User {
++ String email
++ FirebaseUser user
+~ <<Create>> User(String,String,String,String,String)
+}
+class com.example.buttonactivity.ViewTrainings {
+- FirebaseFirestore firestore
+- ArrayList<Training> trainingArrayList
+- ListView trainingListView
+- TrainingsAdapter adapter
+- firebaseDB db
++ String path
+# void onCreate(Bundle)
++ {static} String extractUsername(String)
++ void onEvent(QuerySnapshot,FirebaseFirestoreException)
++ boolean removeOutdatedTrainings(String)
+}
+class com.example.buttonactivity.HomeFragment {
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
+}
+class com.example.buttonactivity.TrainingsAdapter {
+- Context context
+- ArrayList<Training> trainingArrayList
++ <<Create>> TrainingsAdapter(Context,int,ArrayList<Training>)
++ View getView(int,View,ViewGroup)
+}
+class com.example.buttonactivity.profileFragment {
+- {static} int CAMERA_REQUEST
+- {static} int CAMERA_PERMISSION_REQUEST_CODE
+- firebaseDB db
+~ TextView textViewEmail
+~ TextView textViewPassword
+~ TextView tvName
+~ ImageView profile_picture
+~ Button btnChangeGallery
+- int GALLERY_REQ_CODE2
++ Uri imageUri3
+~ boolean changedPic
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
+- void retrieveUserCredentials()
++ void onClick(View)
++ void onActivityResult(int,int,Intent)
++ void launchCamera()
++ void onRequestPermissionsResult(int,String[],int[])
+}
+class com.example.buttonactivity.Register {
+~ Button btnRegister
++ EditText etPassword
+- int GALLERY_REQ_CODE2
++ ImageView imgGallery2
++ Uri imageUri2
++ boolean changedProfile
+# void onCreate(Bundle)
++ void onClick(View)
+# void onActivityResult(int,int,Intent)
++ {static} String checkCreds(String,String,String,String,String)
+}
+class com.example.buttonactivity.logoutFragment {
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
+}
+
+
+com.example.buttonactivity.OnClickListener <|.. com.example.buttonactivity.Login
+androidx.appcompat.app.AppCompatActivity <|-- com.example.buttonactivity.Login
+com.example.buttonactivity.OnClickListener <|.. com.example.buttonactivity.CreateTraining
+androidx.appcompat.app.AppCompatActivity <|-- com.example.buttonactivity.CreateTraining
+com.example.buttonactivity.OnClickListener <|.. com.example.buttonactivity.VideosActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.buttonactivity.VideosActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.buttonactivity.flashScreen
+com.google.firebase.messaging.FirebaseMessagingService <|-- com.example.buttonactivity.PushNotificationService
+com.example.buttonactivity.OnClickListener <|.. com.example.buttonactivity.GymFragment
+androidx.fragment.app.Fragment <|-- com.example.buttonactivity.GymFragment
+androidx.appcompat.app.AppCompatActivity <|-- com.example.buttonactivity.MainActivity
+com.example.buttonactivity.OnClickListener <|.. com.example.buttonactivity.CalendarFragment
+androidx.fragment.app.Fragment <|-- com.example.buttonactivity.CalendarFragment
+com.example.buttonactivity.firebaseDB +.. com.example.buttonactivity.firebaseDB$User
+com.google.firebase.firestore.EventListener <|.. com.example.buttonactivity.ViewTrainings
+androidx.appcompat.app.AppCompatActivity <|-- com.example.buttonactivity.ViewTrainings
+androidx.fragment.app.Fragment <|-- com.example.buttonactivity.HomeFragment
+android.widget.ArrayAdapter <|-- com.example.buttonactivity.TrainingsAdapter
+com.example.buttonactivity.OnClickListener <|.. com.example.buttonactivity.profileFragment
+androidx.fragment.app.Fragment <|-- com.example.buttonactivity.profileFragment
+com.example.buttonactivity.OnClickListener <|.. com.example.buttonactivity.Register
+androidx.appcompat.app.AppCompatActivity <|-- com.example.buttonactivity.Register
+androidx.fragment.app.Fragment <|-- com.example.buttonactivity.logoutFragment
+@enduml
